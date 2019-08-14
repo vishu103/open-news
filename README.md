@@ -22,6 +22,8 @@ It is a beautiful and very useful news app with news from many countries, nation
 
 Screenshots: (Coming Soon...)
 
+![Screenshots](https://user-images.githubusercontent.com/29485313/63019519-2de94400-beb9-11e9-82b6-94093c8217fb.jpg)
+
 Open News for Android: [Download apk file here](https://drive.google.com/file/d/11IX6oRcE6gtGW7CxVIk-QcKb1GofNof-/view?usp=sharing)
 
 **The Github community can contribute freely as all the apps under this pledge will be open-source.**
