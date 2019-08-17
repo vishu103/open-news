@@ -28,4 +28,6 @@ Open News for Android: [Download apk file here](https://drive.google.com/file/d/
 
 [![GooglePlayLink](https://user-images.githubusercontent.com/29485313/61143889-12bd9a00-a4f1-11e9-90ce-73d190532653.jpg)](https://play.google.com/store/apps/details?id=in.edureal.opennews)
 
+**Checkout the 4th app (Bill Split)**: [Here on GitHub](https://github.com/vishu103/bill-split)
+
 **The Github community can contribute freely as all the apps under this pledge will be open-source.**
