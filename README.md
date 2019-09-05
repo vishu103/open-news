@@ -24,7 +24,7 @@ Screenshots:
 
 ![Screenshots](https://user-images.githubusercontent.com/29485313/63019519-2de94400-beb9-11e9-82b6-94093c8217fb.jpg)
 
-Open News for Android: [Download apk file here](https://drive.google.com/file/d/11IX6oRcE6gtGW7CxVIk-QcKb1GofNof-/view?usp=sharing)
+Open News for Android:
 
 [![GooglePlayLink](https://user-images.githubusercontent.com/29485313/61143889-12bd9a00-a4f1-11e9-90ce-73d190532653.jpg)](https://play.google.com/store/apps/details?id=in.edureal.opennews)
 
