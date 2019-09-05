@@ -2,12 +2,20 @@ package in.edureal.opennews;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -19,7 +27,118 @@ public class SettingsActivity extends AppCompatActivity {
     private String[] categories;
     private String[] sources;
 
-    public void setCountry(View view){
+    private RewardedVideoAd rewardVideo;
+    private SharedPreferences sp;
+
+    private static String rewardVideoAdId="ca-app-pub-3940256099942544/5224354917"; // Test Reward Video Ad
+    private String currentFeature;
+
+    public void checkSetCountry(View view){
+        if(sp.contains("countryFeature")){
+            setCountry();
+        }else{
+
+            currentFeature="countryFeature";
+            new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Unlock Feature")
+                    .setContentText("You can unlock this feature by just watching a video.")
+                    .setConfirmText("OK")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            // Show Ad
+                            sDialog.dismissWithAnimation();
+
+                            if(rewardVideo.isLoaded()){
+                                rewardVideo.show();
+                            }else{
+                                rewardVideo.loadAd(rewardVideoAdId, new AdRequest.Builder().build());
+                            }
+
+                        }
+                    })
+                    .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                        }
+                    })
+                    .show();
+
+        }
+    }
+
+    public void checkSetCategory(View view){
+        if(sp.contains("categoryFeature")){
+            setCategory();
+        }else{
+
+            currentFeature="categoryFeature";
+            new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Unlock Feature")
+                    .setContentText("You can unlock this feature by just watching a video.")
+                    .setConfirmText("OK")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            // Show Ad
+                            sDialog.dismissWithAnimation();
+
+                            if(rewardVideo.isLoaded()){
+                                rewardVideo.show();
+                            }else{
+                                rewardVideo.loadAd(rewardVideoAdId, new AdRequest.Builder().build());
+                            }
+
+                        }
+                    })
+                    .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                        }
+                    })
+                    .show();
+
+        }
+    }
+
+    public void checkSetSources(View view){
+        if(sp.contains("sourceFeature")){
+            setSources();
+        }else{
+
+            currentFeature="sourceFeature";
+            new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Unlock Feature")
+                    .setContentText("You can unlock this feature by just watching a video.")
+                    .setConfirmText("OK")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            // Show Ad
+                            sDialog.dismissWithAnimation();
+
+                            if(rewardVideo.isLoaded()){
+                                rewardVideo.show();
+                            }else{
+                                rewardVideo.loadAd(rewardVideoAdId, new AdRequest.Builder().build());
+                            }
+
+                        }
+                    })
+                    .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                        }
+                    })
+                    .show();
+
+        }
+    }
+
+    private void setCountry(){
 
         new LovelyChoiceDialog(this)
                 .setTopColorRes(R.color.success)
@@ -38,7 +157,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    public void setCategory(View view){
+    private void setCategory(){
         new LovelyChoiceDialog(this)
                 .setTopColorRes(R.color.success)
                 .setTitle("Select the category:")
@@ -62,7 +181,7 @@ public class SettingsActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void setSources(View view){
+    private void setSources(){
         new LovelyChoiceDialog(this)
                 .setTopColorRes(R.color.success)
                 .setTitle("Select the Source:")
@@ -94,6 +213,7 @@ public class SettingsActivity extends AppCompatActivity {
         newsCountry=(TextView) findViewById(R.id.newsCountry);
         newsCategory=(TextView) findViewById(R.id.newsCategory);
         newsSource=(TextView) findViewById(R.id.newsSource);
+        currentFeature="";
 
         countries=new String[]{"Argentina","Australia","Austria","Belgium","Brazil","Bulgaria","Canada","China","Colombia","Cuba","Czech Republic","Egypt","France","Germany","Greece","Hong Kong","Hungary","India","Indonesia","Ireland","Israel","Italy","Japan","Latvia","Malaysia","Mexico","Russia","Saudi Arabia","Singapore","South Korea","Sweden","Thailand","UAE","United Kingdom","United States"};
         countries_short=new String[]{"ar","au","at","be","br","bg","ca","cn","co","cu","cz","eg","fr","de","gr","hk","hu","in","id","ie","il","it","jp","lv","my","mx","ru","sa","sg","kr","se","th","ae","gb","us"};
@@ -121,6 +241,61 @@ public class SettingsActivity extends AppCompatActivity {
             SharedPreferenceSingleton.getInstance(this.getApplicationContext()).getSpEditor().commit();
         }
 
+        sp=getSharedPreferences("in.edureal.opennews",MODE_PRIVATE);
+        final SharedPreferences.Editor spEditor=sp.edit();
+
+        rewardVideo= MobileAds.getRewardedVideoAdInstance(this);
+        if(!sp.contains("countryFeature") || !sp.contains("categoryFeature") || !sp.contains("sourceFeature")){
+
+            rewardVideo.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+                @Override
+                public void onRewardedVideoAdLoaded() {
+
+                }
+
+                @Override
+                public void onRewardedVideoAdOpened() {
+
+                }
+
+                @Override
+                public void onRewardedVideoStarted() {
+
+                }
+
+                @Override
+                public void onRewardedVideoAdClosed() {
+                    rewardVideo.loadAd(rewardVideoAdId, new AdRequest.Builder().build());
+                    new SweetAlertDialog(SettingsActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Good job!")
+                            .setContentText("Features unlocked...")
+                            .show();
+                }
+
+                @Override
+                public void onRewarded(RewardItem rewardItem) {
+                    spEditor.putInt(currentFeature,1).commit();
+                }
+
+                @Override
+                public void onRewardedVideoAdLeftApplication() {
+
+                }
+
+                @Override
+                public void onRewardedVideoAdFailedToLoad(int i) {
+                    Toast.makeText(SettingsActivity.this, "There is no ad for you to watch right now. Please try again later...", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onRewardedVideoCompleted() {
+
+                }
+            });
+            rewardVideo.loadAd(rewardVideoAdId, new AdRequest.Builder().build());
+
+        }
+
     }
 
     @Override
@@ -128,4 +303,23 @@ public class SettingsActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
+
+    @Override
+    protected void onPause() {
+        rewardVideo.pause(this);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        rewardVideo.resume(this);
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        rewardVideo.destroy(this);
+        super.onDestroy();
+    }
+
 }

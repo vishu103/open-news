@@ -89,7 +89,7 @@
                     android:orientation="vertical"
                     android:clickable="true"
                     android:background="?attr/selectableItemBackground"
-                    android:onClick="setCountry"
+                    android:onClick="checkSetCountry"
                     android:padding="@dimen/spacing_large">
 
                     <LinearLayout
@@ -131,7 +131,7 @@
                     android:minHeight="?attr/actionBarSize"
                     android:orientation="vertical"
                     android:background="?attr/selectableItemBackground"
-                    android:onClick="setCategory"
+                    android:onClick="checkSetCategory"
                     android:clickable="true"
                     android:padding="@dimen/spacing_large">
 
@@ -174,7 +174,7 @@
                     android:minHeight="?attr/actionBarSize"
                     android:orientation="vertical"
                     android:background="?attr/selectableItemBackground"
-                    android:onClick="setSources"
+                    android:onClick="checkSetSources"
                     android:clickable="true"
                     android:padding="@dimen/spacing_large">
 

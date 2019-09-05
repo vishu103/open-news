@@ -20,6 +20,9 @@ It is a beautiful and very useful news app with news from many countries, nation
 6. Swipe right on an article to copy its link.
 7. Click on any article to open it in browser.
 
+#### Changelog
+1. 5th September 2019 - Added support for displaying ads in the app.
+
 Screenshots:
 
 ![Screenshots](https://user-images.githubusercontent.com/29485313/63019519-2de94400-beb9-11e9-82b6-94093c8217fb.jpg)

@@ -37,6 +37,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -237,6 +238,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         refreshData();
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 
     }
 
